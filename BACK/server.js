@@ -7,6 +7,7 @@ const diagnosticoRoutes = require('./routes/diagnosticoRoutes');
 const especialidadeRoutes = require('./routes/especialidadeRoutes');
 const medicoRoutes = require('./routes/medicoRoutes');
 const pacienteRoutes = require('./routes/pacienteRoutes');
+const doencaRoutes = require('./routes/doencaRoutes');
 
 app.use(express.json());
 
@@ -16,6 +17,7 @@ app.use('/api/paciente', pacienteRoutes);
 app.use('/api/medico', medicoRoutes);
 app.use('/api/diagnostico', diagnosticoRoutes);
 app.use('/api/especialidade', especialidadeRoutes);
+app.use('/api/doenca', doencaRoutes);
 
 
 const PORT = process.env.PORT || 5000;
