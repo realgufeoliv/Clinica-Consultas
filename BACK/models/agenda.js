@@ -9,6 +9,10 @@ const Agenda = sequelize.define('Agenda', {
   CRM: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+        model: 'medico',
+        key: 'CRM'
+      }
   },
   dia_semana: {
     type: DataTypes.STRING(3),
