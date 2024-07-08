@@ -1,4 +1,5 @@
 const Consulta = require('../models/consulta');
+const Paciente = require('../models/paciente');
 
 exports.getAllConsultas = async (req, res) => {
   try {
@@ -11,7 +12,19 @@ exports.getAllConsultas = async (req, res) => {
 
 exports.createConsulta = async (req, res) => {
   try {
-    const consulta = await Consulta.create(req.body);
+    const { id_paciente, pacienteData, ...consultaData } = req.body;
+
+    let paciente = await Paciente.findByPk(id_paciente);
+
+    if (!paciente) {
+      paciente = await Paciente.create({ id: id_paciente, ...pacienteData });
+    }
+
+    const consulta = await Consulta.create({
+      ...consultaData,
+      id_paciente: paciente.id, // Associando a consulta ao paciente
+    });
+
     res.status(201).json(consulta);
   } catch (err) {
     res.status(500).json({ error: err.message });
