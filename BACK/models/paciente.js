@@ -24,7 +24,7 @@ const Paciente = sequelize.define('Paciente', {
     allowNull: false
   },
   endereco: {
-    type: DataTypes.STRING(1),
+    type: DataTypes.STRING(200),  // Corrigido de STRING(1) para STRING(200) ou conforme necessário
     allowNull: false
   },
   CPF: {
@@ -36,4 +36,7 @@ const Paciente = sequelize.define('Paciente', {
   timestamps: false
 });
 
+Paciente.associate = (models) => {
+  Paciente.hasMany(models.Consulta, { foreignKey: 'id_paciente' });
+};
 module.exports = Paciente;

@@ -32,4 +32,5 @@ const Diagnostico = sequelize.define('Diagnostico', {
   timestamps: false
 });
 
+
 module.exports = Diagnostico;

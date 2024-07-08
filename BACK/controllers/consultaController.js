@@ -1,9 +1,31 @@
-const Consulta = require('../models/consulta');
-const Paciente = require('../models/paciente');
+const { Consulta, Paciente, Medico, Especialidade, Diagnostico, Doenca } = require('../models');
 
 exports.getAllConsultas = async (req, res) => {
   try {
-    const consultas = await Consulta.findAll();
+        const consultas = await Consulta.findAll({
+      include: [{
+        model: Paciente,
+        required: true // true para um INNER JOIN, false para um LEFT OUTER JOIN
+      },{
+        model: Medico,
+        required: true // true para um INNER JOIN, false para um LEFT OUTER JOIN
+      },
+      {
+        model: Especialidade,
+        required: true // true para um INNER JOIN, false para um LEFT OUTER JOIN
+      },
+      {
+        model: Diagnostico,
+        required: false ,
+        include: [
+          {
+            model: Doenca,
+            required: false
+          }]
+      }
+    ]
+    });
+
     res.json(consultas);
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -16,4 +16,5 @@ const Doenca = sequelize.define('Doenca', {
   timestamps: false
 });
 
+
 module.exports = Doenca;
