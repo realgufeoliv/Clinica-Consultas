@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
 
 require('dotenv').config();
 const agendaRoutes = require('./routes/agendaRoutes');
@@ -10,9 +9,7 @@ const especialidadeRoutes = require('./routes/especialidadeRoutes');
 const medicoRoutes = require('./routes/medicoRoutes');
 const pacienteRoutes = require('./routes/pacienteRoutes');
 const doencaRoutes = require('./routes/doencaRoutes');
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+
 app.use(express.json());
 
 app.use('/api/agenda', agendaRoutes);
