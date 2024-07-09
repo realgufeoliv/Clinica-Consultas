@@ -1,4 +1,6 @@
 const Medico = require('../models/medico');
+const { sequelize } = require('../models'); // Supondo que seus modelos estejam definidos em '../models'
+const Op = sequelize.Op;
 
 exports.getAllMedicos = async (req, res) => {
   try {
@@ -55,6 +57,36 @@ exports.deleteMedico = async (req, res) => {
       res.status(404).json({ error: 'Medico not found' });
     }
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getMedicoByName = async (req, res) => {
+  try {
+    const { nome } = req.params;
+    console.log(`Buscando médicos com nome parecido com: ${nome}`);
+
+    const query = `
+      SELECT * FROM medico
+      WHERE nome_medico LIKE :nome`;
+
+    const replacements = { nome: `%${nome}%` };
+
+
+    const medicos = await sequelize.query(query, {
+      replacements,
+      type: sequelize.QueryTypes.SELECT
+    });
+
+    if (medicos.length > 0) {
+      console.log(`Encontrados ${medicos.length} médicos.`);
+      res.json(medicos);
+    } else {
+      console.log('Nenhum médico encontrado.');
+      res.status(404).json({ error: 'Medico not found' });
+    }
+  } catch (err) {
+    console.error('Erro ao buscar médicos:', err);
     res.status(500).json({ error: err.message });
   }
 };

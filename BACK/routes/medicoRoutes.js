@@ -6,8 +6,9 @@ const medicoController = require('../controllers/medicoController');
 
 router.get('/', medicoController.getAllMedicos);
 router.post('/', medicoController.createMedico);
-router.put('/', medicoController.updateMedico);
-router.delete('/', medicoController.deleteMedico);
+router.put('/:id', medicoController.updateMedico);
+router.delete('/:id', medicoController.deleteMedico);
 router.get('/:id', medicoController.getMedicoById);
 
+router.get('/name/:nome', medicoController.getMedicoByName);
 module.exports = router;
