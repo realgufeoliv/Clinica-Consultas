@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const Agenda = require('./agenda');  
 
 const Medico = sequelize.define('Medico', {
   CRM: {
@@ -23,5 +24,10 @@ const Medico = sequelize.define('Medico', {
   tableName: 'medico',
   timestamps: false
 });
+
+// Definir associações
+Medico.associate = (models) => {
+  Medico.hasMany(models.Agenda, { foreignKey: 'CRM' });
+};
 
 module.exports = Medico;

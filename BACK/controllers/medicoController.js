@@ -1,10 +1,15 @@
-const Medico = require('../models/medico');
-const { sequelize } = require('../models'); // Supondo que seus modelos estejam definidos em '../models'
+const { Medico, Agenda } = require('../models');
+const { sequelize } = require('../models'); 
 const Op = sequelize.Op;
 
 exports.getAllMedicos = async (req, res) => {
   try {
-    const medicos = await Medico.findAll();
+    const medicos = await Medico.findAll({
+      include: [{
+        model: Agenda,
+        required: true // true para um INNER JOIN, false para um LEFT OUTER JOIN
+      }]
+    });
     res.json(medicos);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -22,14 +27,19 @@ exports.createMedico = async (req, res) => {
 
 exports.getMedicoById = async (req, res) => {
   try {
-    const medico = await Medico.findByPk(req.params.id);
+    const medico = await Medico.findByPk(req.params.id, {
+      include: [{
+        model: Agenda,
+        required: true // true para um INNER JOIN, false para um LEFT OUTER JOIN
+      }]
+    });
     if (medico) {
       res.json(medico);
     } else {
       res.status(404).json({ error: 'Medico not found' });
     }
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status500().json({ error: err.message });
   }
 };
 
@@ -71,7 +81,6 @@ exports.getMedicoByName = async (req, res) => {
       WHERE nome_medico LIKE :nome`;
 
     const replacements = { nome: `%${nome}%` };
-
 
     const medicos = await sequelize.query(query, {
       replacements,

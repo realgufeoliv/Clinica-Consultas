@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
- // Certifique-se de ajustar o caminho conforme necessário
+
 const Consulta = sequelize.define('Consulta', {
   id: {
     type: DataTypes.INTEGER,
