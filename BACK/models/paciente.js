@@ -17,19 +17,19 @@ const Paciente = sequelize.define('Paciente', {
   },
   sexo: {
     type: DataTypes.STRING(1),
-    allowNull: false
+    allowNull: true
   },
   idade: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: true
   },
   endereco: {
     type: DataTypes.STRING(200),  // Corrigido de STRING(1) para STRING(200) ou conforme necessário
-    allowNull: false
+    allowNull: true
   },
   CPF: {
     type: DataTypes.STRING(11),
-    allowNull: false
+    allowNull: true
   }
 }, {
   tableName: 'paciente',

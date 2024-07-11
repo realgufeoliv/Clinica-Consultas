@@ -27,7 +27,7 @@ function Header() {
   };
 
   return (
-    <AppBar style={{ padding: 10 }} sx={{ bgcolor: 'white' }} position="relative">
+    <AppBar style={{ padding: 10 }} sx={{ bgcolor: 'white' }} position="sticky">
       <Box sx={{ display: { xs: "none", sm: "block" } }} position="static">
         {navItems.map((item, index) => (
           <DefaultHeaderButton

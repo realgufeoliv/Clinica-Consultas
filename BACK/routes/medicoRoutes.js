@@ -10,5 +10,5 @@ router.put('/:id', medicoController.updateMedico);
 router.delete('/:id', medicoController.deleteMedico);
 router.get('/:id', medicoController.getMedicoById);
 
-router.get('/name/:nome', medicoController.getMedicoByName);
+router.get('/especialidade/:especialidade_id', medicoController.getMedicoByName);
 module.exports = router;

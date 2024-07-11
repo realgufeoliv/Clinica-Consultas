@@ -9,7 +9,7 @@ const Consulta = sequelize.define('Consulta', {
   },
   data: {
     type: DataTypes.DATE,
-    allowNull: false
+    allowNull: true
   },
   hora_inicio: {
     type: DataTypes.TIME,

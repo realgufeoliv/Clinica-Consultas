@@ -26,8 +26,11 @@ Doenca.associate = (models) => {
 };
 
 
+
+
 Diagnostico.associate({ Doenca });
 Doenca.associate({ Diagnostico });
+
 
   
 module.exports = {

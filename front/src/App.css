@@ -1,5 +1,15 @@
 
 
+.App .main {
+  margin-top: 100px; /* mesma altura que o AppBar */
+}
+
+.App .body {
+  margin: 0;
+  padding: 0;
+}
+
+
 .App {
   text-align: center;
 }
@@ -9,7 +19,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 65vh;
+  margin-top: 64px;
+  height: 80vh;
   
 }
 

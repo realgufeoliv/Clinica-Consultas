@@ -1,4 +1,5 @@
 const { Agenda, Medico } = require('../models');
+const { sequelize } = require('../models'); 
 
 exports.getAllAgendas = async (req, res) => {
   try {
@@ -8,6 +9,26 @@ exports.getAllAgendas = async (req, res) => {
         required: true // true para um INNER JOIN, false para um LEFT OUTER JOIN
       }]
     });
+    res.json(agendas);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getAllAgendasByMedico = async (req, res) => {
+  console.log(req.params);
+  try {
+    const { CRM_medico } = req.params;
+    
+    // Consulta SQL bruta
+    const agendas = await sequelize.query(
+      'SELECT * FROM agenda WHERE CRM = :CRM_medico',
+      {
+        replacements: { CRM_medico: Number(CRM_medico) },
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+
     res.json(agendas);
   } catch (err) {
     res.status(500).json({ error: err.message });

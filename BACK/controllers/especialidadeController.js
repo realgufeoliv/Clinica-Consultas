@@ -9,6 +9,24 @@ exports.getAllEspecialidades = async (req, res) => {
   }
 };
 
+exports.getEspecialidadesByNome = async (req, res) => {
+  const { nome_especialidade } = req.query;
+
+  try {
+    const especialidades = await Especialidade.findAll({
+      where: {
+        nome_especialidade: {
+          [Op.iLike]: `%${nome_especialidade}%`
+        }
+      }
+    });
+
+    res.json(especialidades);
+  } catch (err) {
+    console.error('Erro ao buscar especialidades:', err);
+    res.status(500).json({ error: 'Erro ao buscar especialidades' });
+  }
+};
 
 exports.createEspecialidade = async (req, res) => {
   try {
